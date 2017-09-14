@@ -28,8 +28,11 @@ public class AppointmentController {
     private UserService userService;
 
     @RequestMapping(value = "/create",method = RequestMethod.GET)
-    public String createAppointment(Model model) {
+    public String createAppointment(Principal principal, Model model) {
         Appointment appointment = new Appointment();
+        User user = userService.findByUsername(principal.getName());
+
+        model.addAttribute("user", user);
         model.addAttribute("appointment", appointment);
         model.addAttribute("dateString", "");
 

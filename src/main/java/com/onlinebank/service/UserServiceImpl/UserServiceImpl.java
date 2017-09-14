@@ -20,22 +20,22 @@ import com.onlinebank.service.UserService;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-	
-	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
     private RoleDao roleDao;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+
     @Autowired
     private AccountService accountService;
-	
-	public void save(User user) {
+
+    public void save(User user) {
         userDao.save(user);
     }
 
@@ -46,8 +46,7 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
-    
-    
+
     public User createUser(User user, Set<UserRole> userRoles) {
         User localUser = userDao.findByUsername(user.getUsername());
 
@@ -71,9 +70,9 @@ public class UserServiceImpl implements UserService {
 
         return localUser;
     }
-    
-        @Override
-    public boolean checkUserExists(String username, String email){
+
+    @Override
+    public boolean checkUserExists(String username, String email) {
         if (checkUsernameExists(username) || checkEmailExists(username)) {
             return true;
         } else {
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
-    
+
     public boolean checkEmailExists(String email) {
         if (null != findByEmail(email)) {
             return true;
@@ -97,21 +96,21 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public User saveUser (User user) {
+    public User saveUser(User user) {
         return userDao.save(user);
     }
-    
+
     public List<User> findUserList() {
         return userDao.findAll();
     }
 
-    public void enableUser (String username) {
+    public void enableUser(String username) {
         User user = findByUsername(username);
         user.setEnabled(true);
         userDao.save(user);
     }
 
-    public void disableUser (String username) {
+    public void disableUser(String username) {
         User user = findByUsername(username);
         user.setEnabled(false);
         System.out.println(user.isEnabled());

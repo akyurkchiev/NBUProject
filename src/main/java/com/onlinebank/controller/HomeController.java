@@ -58,7 +58,7 @@ public class HomeController {
             if (userService.checkUsernameExists(user.getUsername())) {
                 model.addAttribute("usernameExists", true);
             }
-
+            model.addAttribute("user", user);
             return "signup";
         } else {
             Set<UserRole> userRoles = new HashSet<>();
@@ -82,4 +82,5 @@ public class HomeController {
 
         return "home";
     }
+ 
 }
