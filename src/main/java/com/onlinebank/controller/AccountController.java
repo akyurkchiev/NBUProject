@@ -60,7 +60,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.GET)
-    public String deposit(Model model) {
+    public String deposit(Model model, Principal principal) {
+        
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
 
@@ -75,7 +78,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
-    public String withdraw(Model model) {
+    public String withdraw(Model model, Principal principal) {
+        
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
 
