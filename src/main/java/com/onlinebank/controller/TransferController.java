@@ -63,6 +63,8 @@ public class TransferController {
 
         Recipient recipient = new Recipient();
 
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipientList", recipientList);
         model.addAttribute("recipient", recipient);
 
@@ -111,6 +113,8 @@ public class TransferController {
     public String toSomeoneElse(Model model, Principal principal) {
         List<Recipient> recipientList = transactionService.findRecipientList(principal);
 
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipientList", recipientList);
         model.addAttribute("accountType", "");
 
